@@ -75,5 +75,10 @@ namespace CourseSignupSystemServer.Services
             //throw new NotImplementedException();
         }
 
+        public bool IsThoiGiannkUnique(string thoiGianNK)
+        {
+            return _dbContext.NienKhoas.Any(u => u.ThoiGian == thoiGianNK);
+            //throw new NotImplementedException();
+        }
     }
 }

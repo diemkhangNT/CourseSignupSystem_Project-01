@@ -19,6 +19,8 @@ namespace CourseSignupSystemServer.Models
         public double HocPhi { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime NgayKhaiGiang { get; set; }
 
         [Required]

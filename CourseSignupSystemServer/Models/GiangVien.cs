@@ -40,8 +40,6 @@
         public string? HinhDaiDien { get; set; }
 
         [Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime NgayHopTac { get; set; }
 
         public bool TrangThaiHD { get; set; } = true;
