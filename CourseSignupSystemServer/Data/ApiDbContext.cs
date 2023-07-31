@@ -31,7 +31,6 @@ namespace CourseSignupSystemServer.Data
         //Set up primary key
         public override int SaveChanges()
         {
-            
             Random rnd = new Random();
             const string chars = "abcdefghijklmnopqrstuvwsyz0123456789";
             foreach (var entry in ChangeTracker.Entries().Where(e=>e.State == EntityState.Added))
