@@ -118,9 +118,32 @@ namespace CourseSignupSystemServer.Data
                     lienHe.MaLH = "LH" + today + "_" + num13;
                 }
             }
-            return base.SaveChanges();
+            //foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Modified))
+            //{
+            //    if(entry.Entity is ChucVu chucVu)
+            //    {
+            //        bool v = ChucVus.Any(u => u.TenCV == chucVu.TenCV);
+            //        if (v)
+            //        {
+            //            chucVu.TenCV = "Bị trùng";
+            //        }
+            //    }
+            //}
+                return base.SaveChanges();
         }
-
+        //public ChucVu GetItemById(string id)
+        //{
+        //    return ChucVus.FirstOrDefault(x => x.MaCV == id);
+        //}
+        //public bool IsTenCVExisted(string id, ChucVu chucVunew)
+        //{
+        //    ChucVu chucvuold = GetItemById(id);
+        //     if(ChucVus.Any(u => u.TenCV == chucVunew.TenCV && chucvuold.TenCV != chucVunew.TenCV))
+        //     {
+        //        return true;
+        //     }
+        //     return false;
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

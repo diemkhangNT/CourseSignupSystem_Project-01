@@ -22,8 +22,9 @@ namespace CourseSignupSystemClient.Controllers
 
         public IActionResult Details(string id)
         {
-            ChucVu chucVus = new ChucVu();
-            return View();
+            ChucVu chucVus;
+            chucVus = aPIGateway.GetChucVu(id);
+            return View(chucVus);
         }
 
         [HttpGet]
@@ -44,13 +45,15 @@ namespace CourseSignupSystemClient.Controllers
         [HttpGet]
         public IActionResult Edit(string id)
         {
-            ChucVu chucVu = new ChucVu();
-            return View();
+            ChucVu chucVu;
+            chucVu = aPIGateway.GetChucVu(id);
+            return View(chucVu);
         }
 
         [HttpPost]
         public IActionResult Edit(ChucVu chucVu)
         {
+            aPIGateway.UpdateChucVu(chucVu);
             return RedirectToAction("Index");
         }
 
