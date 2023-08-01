@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using CourseSignupSystemServer.Data;
 using CourseSignupSystemServer.Models;
 using CourseSignupSystemServer.Interfaces;
+using static Microsoft.AspNetCore.Razor.Language.TagHelperMetadata;
 
 namespace CourseSignupSystemServer.Controllers
 {
@@ -58,19 +59,26 @@ namespace CourseSignupSystemServer.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutLoaiDiem(string id, LoaiDiem loaiDiem)
         {
-            if (id != loaiDiem.MaLDiem)
+            //if (id != loaiDiem.MaLDiem)
+            //{
+            //    return BadRequest();
+            //}
+            var existingTenLD = _context.LoaiDiems.FirstOrDefault(x => x.MaLDiem == loaiDiem.MaLDiem);
+
+            if (existingTenLD == null)
             {
-                return BadRequest();
+                return BadRequest(); // Không tìm thấy chức vụ để cập nhật
             }
 
+            if (existingTenLD.TenLDiem != loaiDiem.TenLDiem && _context.LoaiDiems.Any(x => x.TenLDiem == loaiDiem.TenLDiem))
+            {
+                return BadRequest("Tên loại điểm này đã tồn tại! Vui lòng nhập lại!");
+            }
+            _context.LoaiDiems.Remove(existingTenLD);
             _context.Entry(loaiDiem).State = EntityState.Modified;
 
             try
             {
-                if(_existTenLD.IsTenLDiemUnique(loaiDiem.TenLDiem))
-                {
-                    return BadRequest("Tên loại điểm này đã tồn tại! Vui lòng nhập lại!");
-                }
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)

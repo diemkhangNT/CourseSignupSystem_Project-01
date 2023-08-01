@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CourseSignupSystemServer.Models.LoaiDiem>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaLDiem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TenLDiem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeSo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaLDiem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenLDiem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeSo)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.MaLDiem }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.MaLDiem }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.MaLDiem})
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

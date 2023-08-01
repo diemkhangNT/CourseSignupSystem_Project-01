@@ -3,43 +3,43 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CourseSignupSystemClient.Controllers
 {
-    public class ChucVuController : Controller
+    public class BoMonController : Controller
     {
         private readonly APIGateway aPIGateway;
 
-        public ChucVuController(APIGateway aPIGateway)
+        public BoMonController(APIGateway aPIGateway)
         {
             this.aPIGateway = aPIGateway;
         }
 
         public IActionResult Index()
         {
-            List<ChucVu> chucVus;
+            List<BoMon> boMons;
             //API get will come
-            chucVus = aPIGateway.ListChucVus();
-            return View(chucVus);
+            boMons = aPIGateway.ListBoMons();
+            return View(boMons);
         }
 
         public IActionResult Details(string id)
         {
-            ChucVu chucVus;
-            chucVus = aPIGateway.GetChucVu(id);
-            return View(chucVus);
+            BoMon boMons;
+            boMons = aPIGateway.GetBoMon(id);
+            return View(boMons);
         }
 
         [HttpGet]
         public IActionResult Create()
         {
-            ChucVu chucVu = new ChucVu();
+            BoMon BoMon = new BoMon();
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(ChucVu chucVu)
+        public IActionResult Create(BoMon BoMon)
         {
             try
             {
-                aPIGateway.CreateChucVu(chucVu);
+                aPIGateway.CreateBoMon(BoMon);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -47,23 +47,23 @@ namespace CourseSignupSystemClient.Controllers
                 ModelState.AddModelError("", ex.Message); // Thêm lỗi vào ModelState
                 return View(); // Trả về View để hiển thị lỗi
             }
-            
+
         }
 
         [HttpGet]
         public IActionResult Edit(string id)
         {
-            ChucVu chucVu;
-            chucVu = aPIGateway.GetChucVu(id);
-            return View(chucVu);
+            BoMon BoMon;
+            BoMon = aPIGateway.GetBoMon(id);
+            return View(BoMon);
         }
 
         [HttpPost]
-        public IActionResult Edit(ChucVu chucVu)
+        public IActionResult Edit(BoMon BoMon)
         {
             try
             {
-                aPIGateway.UpdateChucVu(chucVu);
+                aPIGateway.UpdateBoMon(BoMon);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -71,23 +71,23 @@ namespace CourseSignupSystemClient.Controllers
                 ModelState.AddModelError("", ex.Message); // Thêm lỗi vào ModelState
                 return View(); // Trả về View để hiển thị lỗi
             }
-            
+
         }
 
         [HttpGet]
         public IActionResult Delete(string id)
         {
-            ChucVu chucVu;
-            chucVu = aPIGateway.GetChucVu(id);
-            return View(chucVu);
+            BoMon BoMon;
+            BoMon = aPIGateway.GetBoMon(id);
+            return View(BoMon);
         }
 
         [HttpPost]
-        public IActionResult Delete(ChucVu chucVu)
+        public IActionResult Delete(BoMon BoMon)
         {
             try
             {
-                aPIGateway.DeleteChucVu(chucVu.MaCV);
+                aPIGateway.DeleteBoMon(BoMon.MaBM);
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
@@ -95,7 +95,7 @@ namespace CourseSignupSystemClient.Controllers
                 ModelState.AddModelError("", ex.Message); // Thêm lỗi vào ModelState
                 return View(); // Trả về View để hiển thị lỗi
             }
-            
+
         }
     }
 }

@@ -57,31 +57,23 @@ namespace CourseSignupSystemServer.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutChucVu(string id, ChucVu chucVu)
         {
-            var existingPosition = _context.ChucVus.FirstOrDefault(x => x.MaCV == chucVu.MaCV);
+            var existingChucVu = _context.ChucVus.FirstOrDefault(x => x.MaCV == chucVu.MaCV);
 
-            if (existingPosition == null)
+            if (existingChucVu == null)
             {
                 return BadRequest(); // Không tìm thấy chức vụ để cập nhật
             }
 
-            if (existingPosition.TenCV != chucVu.TenCV && _context.ChucVus.Any(x => x.TenCV == chucVu.TenCV))
+            if (existingChucVu.TenCV != chucVu.TenCV && _context.ChucVus.Any(x => x.TenCV == chucVu.TenCV))
             {
                 return BadRequest("TenCV mới trùng với các TenCV khác"); // TenCV mới trùng với các TenCV khác
             }
-            //if (id != chucVu.MaCV)
-            //{
-            //    return BadRequest();
-            //}
-            existingPosition = null;
+            _context.ChucVus.Remove(existingChucVu);
+
             _context.Entry(chucVu).State = EntityState.Modified;
 
             try
             {
-                //bool v = _context.IsTenCVExisted(id, chucVu);
-                //if (v)
-                //{
-                //    return BadRequest("Tên chức vụ không được trùng!");
-                //}
                 _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)

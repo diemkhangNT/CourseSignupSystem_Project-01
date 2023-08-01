@@ -131,19 +131,6 @@ namespace CourseSignupSystemServer.Data
             //}
                 return base.SaveChanges();
         }
-        //public ChucVu GetItemById(string id)
-        //{
-        //    return ChucVus.FirstOrDefault(x => x.MaCV == id);
-        //}
-        //public bool IsTenCVExisted(string id, ChucVu chucVunew)
-        //{
-        //    ChucVu chucvuold = GetItemById(id);
-        //     if(ChucVus.Any(u => u.TenCV == chucVunew.TenCV && chucvuold.TenCV != chucVunew.TenCV))
-        //     {
-        //        return true;
-        //     }
-        //     return false;
-        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

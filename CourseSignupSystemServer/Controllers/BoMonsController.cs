@@ -58,19 +58,23 @@ namespace CourseSignupSystemServer.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBoMon(string id, BoMon boMon)
         {
-            if (id != boMon.MaBM)
+            var existingBoMon = _context.BoMons.FirstOrDefault(x => x.MaBM == boMon.MaBM);
+
+            if (existingBoMon == null)
             {
-                return BadRequest();
+                return BadRequest(); // Không tìm thấy chức vụ để cập nhật
             }
+
+            if (existingBoMon.TenBM != boMon.TenBM && _context.BoMons.Any(x => x.TenBM == boMon.TenBM))
+            {
+                return BadRequest("Ten bộ môn mới trùng với các tên bộ môn khác");
+            }
+            _context.BoMons.Remove(existingBoMon);
 
             _context.Entry(boMon).State = EntityState.Modified;
 
             try
             {
-                if(_existTenBM.IsTenBMUnique(boMon.TenBM))
-                {
-                    return BadRequest("Tên bộ môn này đã tồn tại!");
-                }
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
